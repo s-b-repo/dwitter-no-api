@@ -29,9 +29,9 @@ class TwitterLoginGUI:
         entry.pack(pady=5)
         return entry
 
-def handle_login(self):
-    username = self.username_entry.get()
-    password = self.password_entry.get()
+    def handle_login(self):
+        username = self.username_entry.get()
+        password = self.password_entry.get()
 
     try:
         self.scraper = TwitterScraper()
