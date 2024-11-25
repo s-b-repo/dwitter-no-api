@@ -29,19 +29,18 @@ class TwitterLoginGUI:
         entry.pack(pady=5)
         return entry
 
-    def handle_login(self):
-        username = self.username_entry.get()
-        password = self.password_entry.get()
-        if not all([username, password]):
-            self.status_label.configure(text="All fields are required!", text_color="red")
-            return
-        try:
-            self.scraper = TwitterScraper(username, password)
-            self.scraper.login()
-            self.status_label.configure(text="Login successful!", text_color="green")
-            self.load_main_gui()
-        except Exception as e:
-            self.status_label.configure(text=f"Login failed: {str(e)}", text_color="red")
+def handle_login(self):
+    username = self.username_entry.get()
+    password = self.password_entry.get()
+
+    try:
+        self.scraper = TwitterScraper()
+        self.scraper.login(username=username, password=password)
+        self.status_label.configure(text="Login successful!", text_color="green")
+        self.load_main_gui()
+    except RuntimeError as e:
+        self.status_label.configure(text=f"Login failed: {str(e)}", text_color="red")
+
 
     def load_main_gui(self):
         self.root.destroy()
